@@ -1,0 +1,36 @@
+/* Reset */
+header, footer, article, nav, section, aside, time, hgroup {
+	display : block;
+}
+html, body, header, footer, article, nav, section, aside, time, h1, h2, h3, p, a, ul, li, dl, dd, dt, table, thead, tfoot, tbody, th, tr, td {
+	border : 0;
+	margin : 0;
+	outline : 0;
+	padding : 0;
+}
+
+h1 ,.shadow{
+    color: #0000FF;
+    margin: 0;
+	font-size: 26px;
+	text-align:center;
+	text-shadow: 0 1px 0 #ccc, 
+               0 2px 0 #c9c9c9,
+               0 3px 0 #bbb,
+               0 4px 0 #b9b9b9,
+               0 5px 0 #aaa,
+               0 6px 1px rgba(0,0,0,.1),
+               0 0 5px rgba(0,0,0,.1),
+               0 1px 3px rgba(0,0,0,.3),
+               0 3px 5px rgba(0,0,0,.2),
+               0 5px 10px rgba(0,0,0,.25),
+               0 10px 10px rgba(0,0,0,.2),
+               0 20px 20px rgba(0,0,0,.15);
+}
+
+.shadow{font-size: 16px;}
+
+.bg{background-color: #ffffcc;}
+tr.border_bottom 
+td {border-bottom:1pt solid #aabbdd;padding-top:20px;} 
+.arabic {text-align: right; direction: rtl; unicode-bidi: embed;font-size: 25px;}
