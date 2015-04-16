@@ -1,0 +1,5 @@
+ SELECT `SuraID` , count( `ID` ) AS count
+FROM `quran`
+WHERE `DatabaseID` =4
+GROUP BY `SuraID`
+LIMIT 0 , 114 

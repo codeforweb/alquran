@@ -6,7 +6,6 @@ Compiled file=AlQuran.chm
 Contents file=TOC.hhc
 Default topic=0.html
 Display compile progress=Yes
-Full-text search=Yes
 Language=0x409 English (United States)
 
 
@@ -126,8 +125,6 @@ Language=0x409 English (United States)
 112.html
 113.html
 114.html
-frameindex.html
-index.html
 
 [INFOTYPES]
 

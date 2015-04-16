@@ -25,7 +25,7 @@ while ($rs = mysql_fetch_array($result, MYSQL_ASSOC)) {
 	$indexstr.='<tbody><tr><td><a href="'.$surano.'.html">'.$surano.'</a></td><td align="left"><a href="'.$filename.'">'.$surahname.'</a></td></tr>'."\n";
 	$leftframe.='<li><a href="'.$filename.'" target="main">'.$surahname.'</a></li>'."\n";
 	
-	$resultset = mysql_query('SELECT `AyahText` , `VerseID`,lang.`DatabaseID`, Name FROM `quran` , lang WHERE `SuraID` = '.$surano.' AND lang.DatabaseID = quran.DatabaseID ORDER BY `VerseID`');
+	$resultset = mysql_query('SELECT AyahText,VerseID,lang.DatabaseID, Name FROM `quran` , lang WHERE `SuraID` = '.$surano.' AND lang.DatabaseID = quran.DatabaseID ORDER BY VerseID,DatabaseID');
 
 	$str ='<!DOCTYPE html><html> <head><meta charset="UTF-8">'."\n";
 	$str .='<link rel="stylesheet" media="screen" href="includes/style.css"/>'."\n";
