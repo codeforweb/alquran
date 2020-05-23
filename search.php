@@ -5,11 +5,12 @@
 		<link rel="stylesheet" media="screen" href="includes/style.css"/>
 	</head>
 <body class="bg">
-	<table>
+
 		<form method='GET'  action="<?php echo $_SERVER['PHP_SELF']; ?>">
 			<input type="text" name="search" title="search">
 			<input type="submit" value="search">
 		</form>
+<table>		
 <?php
 	$search=$_GET['search'];
 	if(trim($search)!=""){
@@ -56,10 +57,12 @@
 		}
 			echo $str;
 		mysql_close($link);
+?>
+		</table>
+<?php		
 	}	
 ?>
 	
-		</table>
 	</body>
 </html>
 	
