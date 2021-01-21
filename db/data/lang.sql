@@ -25,4 +25,5 @@ INSERT INTO `lang` (`ID`, `DatabaseID`, `Language`, `Orientation`, `Name`, `Tran
 (4, 4, 'English', 'LTR', 'Saheeh International', ''),
 (5, 5, 'Tamil', 'LTR', 'தாருல் ஹுதா', 'ஆ.கா.அப்துல் ஹமீது பாகவி'),
 (6, 6, 'Tamil', 'LTR', 'ஜான் டிரஸ்ட் நிறுவனம்', 'டாக்டர். முஹம்மது ஜான்'),
-(7, 7, 'Tamil', 'LTR', 'மன்னர் ஃபஹத் வளாகம் (சவூதி)', '');
+(7, 7, 'Tamil', 'LTR', 'மன்னர் ஃபஹத் வளாகம் (சவூதி)', ''),
+(8, 8, 'English', 'LTR', 'Ruwwad Center', 'Ruwwad Center');
