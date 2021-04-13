@@ -33,7 +33,7 @@ h1 ,.shadow{
 .bg{background-color: #ffffcc;}
 tr.border_bottom 
 td {border-bottom:1pt solid #aabbdd;padding-top:20px;} 
-.arabic {text-align: right; direction: rtl; unicode-bidi: embed;font-size: 25px;}
+.arabic {text-align: left; direction: rtl; unicode-bidi: embed;font-size: 25px;}
 .trans{font-size:16px} 
 .pub::before {
     content: "—";
