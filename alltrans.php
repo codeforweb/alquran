@@ -1,12 +1,15 @@
 ﻿<?php
-$link = mysql_connect('localhost', 'root', '') or die('Could not connect: ' . mysql_error());
-mysql_select_db('quranshareef') or die('Could not select database');
-mysql_query("SET NAMES 'utf8'", $link);
+$mysqli = new mysqli("localhost","root","","quranshareef");
 
-$result = mysql_query('SELECT * FROM surahnames where DatabaseID=4') or die('Query failed: ' . mysql_error());
+if ($mysqli -> connect_errno) {
+  echo "Failed to connect to MySQL: " . $mysqli -> connect_error;
+  exit();
+}
+$mysqli -> set_charset("utf8");
+$result = $mysqli->query('SELECT * FROM surahnames where DatabaseID=4');
 
 $indexstr ='<!DOCTYPE html><html> <head><meta charset="UTF-8">';
-$indexstr .='<style>h1{text-align:center}.bg{background-color: #ffffcc;}table { font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; }li{margin-bottom:10px;}</style>';
+$indexstr .='<style>h1{text-align:center}.bg{background-color: #ffffcc;} table { font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; }li{margin-bottom:10px;} </style>';
 $indexstr .='</head> <body class="bg">'."\n";
 $leftframe=$indexstr;
 
@@ -17,7 +20,7 @@ $indexstr.='<tbody><tr><td bgcolor="#009999">No</td><td bgcolor="#009999" align=
 
 $leftframe.='<ol>';
 
-while ($rs = mysql_fetch_array($result, MYSQL_ASSOC)) {
+while ($rs = $result->fetch_assoc() ) {
 	$surano = $rs['surano'];
 	$surahname= $rs['Name'];
 	$filename= $surano.'.html';
@@ -25,7 +28,7 @@ while ($rs = mysql_fetch_array($result, MYSQL_ASSOC)) {
 	$indexstr.='<tbody><tr><td><a href="'.$surano.'.html">'.$surano.'</a></td><td align="left"><a href="'.$filename.'">'.$surahname.'</a></td></tr>'."\n";
 	$leftframe.='<li><a href="'.$filename.'" target="main">'.$surahname.'</a></li>'."\n";
 	
-	$resultset = mysql_query('SELECT AyahText,VerseID,lang.DatabaseID, Name FROM `quran` , lang WHERE `SuraID` = '.$surano.' AND lang.DatabaseID = quran.DatabaseID ORDER BY VerseID,DatabaseID');
+	$resultset = $mysqli->query('SELECT AyahText,VerseID,lang.DatabaseID, Name FROM `quran` , lang WHERE `SuraID` = '.$surano.' AND lang.DatabaseID = quran.DatabaseID ORDER BY VerseID,DatabaseID');
 
 	$str ='<!DOCTYPE html><html> <head><meta charset="UTF-8">'."\n";
 	$str .='<link rel="stylesheet" media="screen" href="includes/style.css"/>'."\n";
@@ -34,8 +37,9 @@ while ($rs = mysql_fetch_array($result, MYSQL_ASSOC)) {
 	
 	$str.='<h1>'.$surano.' - '.$surahname.'</h1>'."\n";
 	$str.='<div class="shadow">';
-	$rs = mysql_query("SELECT Name FROM surahnames where `surano`=$surano AND (DatabaseID=1 OR DatabaseID=5)");
-	while ($rs1 = mysql_fetch_row($rs)) {	
+	
+	$rs = $mysqli->query("SELECT Name FROM surahnames where `surano`=$surano AND (DatabaseID=1 OR DatabaseID=5)");
+	while ($rs1 = $rs-> fetch_row()) {
 		$str.= $rs1[0].'<br/>';
 	}
 	$str.='</div>'."\n";
@@ -43,7 +47,7 @@ while ($rs = mysql_fetch_array($result, MYSQL_ASSOC)) {
 			$str.='<tr class="arabic" style="text-align:left;"><td>بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ </td></tr>'."\n";
 
 	$prevVerse=0;	
-	while ($rsAyah= mysql_fetch_array($resultset, MYSQL_ASSOC)) {
+	while ($rsAyah= $resultset-> fetch_assoc()) {
 		$ayah= $rsAyah['AyahText'];
 		$name= $rsAyah['Name'];
 		$VerseID=$rsAyah['VerseID'];
@@ -54,8 +58,8 @@ while ($rs = mysql_fetch_array($result, MYSQL_ASSOC)) {
 			$str.='<tr class="border_bottom"><td><span id="'.$VerseID.'">'.$surano.':'.$VerseID.'</span><br/>';			
 		}
 		if($DatabaseID==1){
-			$str.= '<span class="arabic">'.$ayah.'</span><br/>';
-		}else $str.='<span>'.$name.'<br/>'.$ayah.'</span><br/><br/>';
+			$str.= '<div class="arabic">'.$ayah.'</div>';
+		}else $str.='<div class="trans">'.$ayah.'</div><small class="pub">'.$name.'</small><br/><br/>';
 
 		if($VerseID!=$prevVerse){
 			$str.='</td></tr>'."\n";
@@ -73,8 +77,7 @@ while ($rs = mysql_fetch_array($result, MYSQL_ASSOC)) {
 	file_put_contents('alltrans/frameindex.html', $leftframe);
 	echo $indexstr;
 
-mysql_free_result($result);
-mysql_close($link);
-echo $cnt.' Lines..  DONE';
+$result -> free_result();
+$mysqli -> close();
 
 ?>

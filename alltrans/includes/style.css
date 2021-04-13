@@ -34,3 +34,9 @@ h1 ,.shadow{
 tr.border_bottom 
 td {border-bottom:1pt solid #aabbdd;padding-top:20px;} 
 .arabic {text-align: right; direction: rtl; unicode-bidi: embed;font-size: 25px;}
+.trans{font-size:16px} 
+.pub::before {
+    content: "—";
+}
+
+</style>
